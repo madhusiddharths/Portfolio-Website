@@ -231,19 +231,19 @@ nav img {
   color: rgba(24, 185, 207, 0.9);
 }
 
-.nav-link:nth-child(5):hover {
+.nav-link:nth-child(6):hover {
   transform: scale(1.08);
   background: transparent;
   transition: transform 0.4s ease-in-out;
 }
 
-.nav-link:nth-child(5) a {
+.nav-link:nth-child(6) a {
   display: block;
   padding: 0.8rem 2.5rem;
   cursor: pointer;
 }
 
-.nav-link:nth-child(5) a {
+.nav-link:nth-child(6) a {
   color: rgb(204, 213, 243);
 }
 
@@ -330,7 +330,7 @@ main {
 }
 
 .cta2,
-.nav-link:nth-child(5) {
+.nav-link:nth-child(6) {
   position: relative;
   border-radius: 1rem;
   border-image-slice: 1;
@@ -343,7 +343,7 @@ main {
 }
 
 .cta2::after,
-.nav-link:nth-child(5)::after {
+.nav-link:nth-child(6)::after {
   position: absolute;
   content: "";
   top: -1.8px;
@@ -580,6 +580,19 @@ h3 {
 
 .side-project span {
   font-family: "Satoshi 500";
+}
+
+/* CERTIFICATION SECTION STYLING */
+.certification-images {
+  display: flex;
+  justify-content: center;
+  gap: 7%;             /* Space between images */
+  margin-top: 7rem;      /* Space between heading and images */
+}
+
+.certification-images img {
+  width: 200px;
+  height: auto;
 }
 
 /* CONTACT SECTION STYLING */
