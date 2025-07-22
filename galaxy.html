@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galaxy Explorer</title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/font-root-styles/general-sans.css" />
+  <link rel="stylesheet" href="./css/font-root-styles/okinesans.css" />
+  <link rel="stylesheet" href="./css/font-root-styles/satoshi.css" />
+</head>
+<body>
+
+<header>
+  <h1>Galaxy explorer</h1>
+  <div class="separator"></div>
+</header>
+
+<main>
+  <article>
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Overview</h2>
+      <p>
+        A star-gazing application using Streamlit, Polars, and Plotly that displays visible stars based on
+        the user's geographic location, viewing direction, and angle from the horizon. The system calculates real-time
+        star positions using astronomical and geospatial data to provide an accurate and interactive sky map. A creative
+        extension of the project simulates viewing Earth’s historical events from distant stars by accounting for
+        light-travel time, enabling users to conceptually “look back in time.” The platform combines precise celestial
+        computation (earth's tilt, location of the event, star & earth's revolution, etc) with an intuitive interface,
+        allowing users to explore both the present sky and past Earth timelines.
+      </p>
+    </section>
+
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Data Preprocessing</h2>
+      <p style="font-weight: bold; font-size: 1.1em; margin-bottom: 0.5em;">Dataset Overview</p>
+      <p>
+        The project uses the Gaia DR-3 dataset, which contains records of over 1.8 billion stars and more than 150
+        features. The dataset is distributed across 3,386 files using Healpix level 12 partitioning, occupying over
+        750 GB. These features include positional data, brightness measurements, astrophysical properties, filtering
+        metrics, and derived attributes.
+      </p>
+
+      <p style="font-weight: bold; font-size: 1.1em; margin-bottom: 0.5em;">Initial Preprocessing</p>
+      <p>
+        To manage the data effectively, an initial preprocessing step was performed. This involved dropping unnecessary
+        columns and repartitioning the data using Healpix level 2, resulting in 192 Parquet files totaling approximately
+        500 GB. This made the dataset more manageable and optimized for further processing.
+      </p>
+
+      <p style="font-weight: bold; font-size: 1.1em; margin-bottom: 0.5em;">Phase 1: Visible Stars Pipeline</p>
+      <p>
+        The first pipeline focused on identifying stars visible to the naked eye from Earth. Stars were filtered based
+        on brightness and distance, and additional irrelevant columns were removed. The cleaned data was then merged
+        into a single Parquet file for efficient access and real-time usage in the star-gazing application.
+      </p>
+
+      <p style="font-weight: bold; font-size: 1.1em; margin-bottom: 0.5em;">Phase 2: Scientific Star Pipeline</p>
+      <p>
+        The second pipeline aimed for scientific precision. It applied stricter filtering criteria as recommended by the
+        Gaia DR-3 documentation to extract a subset of approximately 650 million scientifically reliable stars.
+        This refined dataset was further partitioned into over 200 Parquet files based on each star’s light-year
+        distance from Earth. It was used in the Galaxy Explorer phase of the project to simulate how Earth’s history
+        would appear from different points in the galaxy.
+      </p>
+    </section>
+
+
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Night Sky Explorer</h2>
+      <p>
+        The Night Sky Explorer offers users an accurate, real-time view of the night sky based on their geographic
+        location (latitude and longitude), viewing direction (with north at 0°), and angle above the horizon. It
+        visualizes precise star positions using filtered data limited to those visible to the naked eye. To account
+        for varying light pollution, the app includes a brightness filter based on stellar magnitude—ranging from 6.5
+        (dark rural skies) to 2 (bright urban skies). While it doesn’t simulate atmospheric conditions like clouds, it
+        provides a clear and interactive experience of how the night sky appears from any point on Earth under different
+        visibility conditions.
+      </p>
+    </section>
+
+    <section style="width: 100%; margin: 0 auto;">
+      <div style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0;">
+        <figure style="flex: 1; text-align: center;">
+          <img src="img/stars_ui.png" alt="Night Sky Explorer UI"
+               style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+          <figcaption style="font-style: italic; color: #666; margin-top: 0.5rem;">
+            Figure 1a: Night Sky Explorer UI.
+          </figcaption>
+        </figure>
+        <figure style="flex: 1; text-align: center;">
+          <img src="img/stars_op.png" alt="Night Sky Explorer Output"
+               style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+          <figcaption style="font-style: italic; color: #666; margin-top: 0.5rem;">
+            Figure 1b: Night Sky Explorer Output.
+          </figcaption>
+        </figure>
+      </div>
+      <p>
+        The first image showcases the user interface of the Night Sky Explorer application, designed for intuitive
+        control over viewing parameters. The second image displays the interactive star map, which dynamically renders
+        the night sky based on user inputs such as location, direction, and viewing angle.
+      </p>
+    </section>
+
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Galaxy Explorer</h2>
+      <p>
+        The Galaxy Explorer is a data-driven celestial analysis tool that identifies stars from which past Earth
+        events could theoretically be observed in real time, based on the concept of light-travel delay. Assuming
+        access to an extremely powerful telescope, the tool calculates which stars would currently be receiving
+        light from a specific event on Earth. It factors in Earth’s rotation, axial tilt, revolution, the star’s
+        position and motion, the event’s geographic location and duration, and the time taken for light to travel.
+        The output is a ranked table of the top 10 stars with the highest visibility likelihood—filtering out stars
+        that would miss the event due to misalignment or insufficient event duration.
+      </p>
+    </section>
+
+    <section style="width: 100%; margin: 0 auto;">
+      <div style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0;">
+        <figure style="flex: 1; text-align: center;">
+          <img src="img/galaxy_ui.png" alt="Galaxy Explorer UI"
+               style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+          <figcaption style="font-style: italic; color: #666; margin-top: 0.5rem;">
+            Figure 2a: Galaxy Explorer UI.
+          </figcaption>
+        </figure>
+        <figure style="flex: 1; text-align: center;">
+          <img src="img/stars_op.png" alt="Galaxy Explorer Output"
+               style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+          <figcaption style="font-style: italic; color: #666; margin-top: 0.5rem;">
+            Figure 2b: Galaxy Explorer Output.
+          </figcaption>
+        </figure>
+      </div>
+      <p>
+        The first image showcases the user interface of the Galaxy Explorer application, designed for intuitive
+        control over viewing parameters. The second image displays the output - first 10 stars from which we can
+        view the event.
+      </p>
+    </section>
+
+
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Challenges</h2>
+      <p>
+        The project faced several challenges, with three key hurdles standing out:
+      </p>
+      <ol>
+        <li>
+          <strong>Data Size:</strong> The dataset started at 750 GB, requiring the development of fast and efficient
+          data pipelines to filter relevant information while storing intermediate outputs for quick access.
+        </li>
+        <li>
+          <strong>Complex Data Structure:</strong> With over 150 columns, each containing unique information—ranging
+          from star composition and positional data to correlations and metrics—it was crucial to understand the
+          significance of each feature. We had to carefully decide how to filter, process, and leverage this data to
+          meet the project's objectives.
+        </li>
+        <li>
+          <strong>Scientific Accuracy:</strong> Ensuring the project’s scientific validity was another major challenge.
+          Numerous factors influenced the results, so we needed to brainstorm and incorporate these variables into our
+          calculations to maintain precision and reliability.
+        </li>
+      </ol>
+    </section>
+
+
+    <section style="width: 100%; margin: 0 auto;">
+      <h2>Conclusion</h2>
+      <p>
+        This project deepened my understanding of the complexities involved in large-scale data preprocessing,
+        especially under time and resource constraints. It also gave me valuable insight into the scientific
+        principles behind observing and tracking stars, including the calculations required to determine their future
+        positions. Additionally, working with Polars allowed me to experience firsthand its performance advantages
+        over Pandas when handling massive datasets.
+      </p>
+    </section>
+  </article>
+</main>
+<footer>
+  <p>Designed and Developed by <span>Madhu Siddharth Suthagar</span></p>
+</footer>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
