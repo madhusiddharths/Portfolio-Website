@@ -20,7 +20,7 @@
        <body class="project-page saturdae">       saturdae
        <body class="project-page traffic">        trafficprediction
        <body class="project-page vit">            vision_transformer
-       <body class="project-page alzheimers">     alzheimers   (page not yet created)
+       <body class="project-page alzheimers">     alzheimers
    ===================================================================== */
 
 
@@ -837,8 +837,22 @@ article figcaption {
 
 
 /* =====================================================================
-   ALZHEIMER'S  (page not yet created — styles preserved for when it is)
+   ALZHEIMER'S
    ===================================================================== */
+/* Classification report block (dark code-style panel) */
+.alzheimers .classification-report-container {
+    background: #1e1e1e;
+    color: #e4e4e4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .alzheimers article ol {
     padding-left: 2rem;
     margin: 1rem 0;
